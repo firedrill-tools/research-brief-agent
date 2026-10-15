@@ -23,3 +23,5 @@ The result includes `source_ids` that were passed as context, `citation_map` fro
 The application is useful without Firedrill. A thin Firedrill integration and persisted scenarios will be added against the qualified new release, not the retired interface. This repository is private and has no selected public license.
 
 Implementation references: [LlamaIndex citation query engine](https://docs.llamaindex.ai/en/stable/api_reference/query_engine/citation/), [Google GenAI integration](https://docs.llamaindex.ai/en/stable/api_reference/llms/google_genai/).
+
+Explore related applications in the [Firedrill example catalog](https://github.com/firedrill-tools/firedrill-example-catalog). Product and setup references: [Firedrill](https://firedrill.run/) and the [official developer documentation](https://docs.firedrill.run/). Use documentation matching the qualified release; this repository records its current integration limits above.
