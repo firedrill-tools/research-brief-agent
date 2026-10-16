@@ -1,0 +1,43 @@
+{
+  "synthetic": true,
+  "dataset": {
+    "id": "synthetic-research-cases",
+    "version": 1,
+    "profile": "boundary",
+    "case_id": "different-populations"
+  },
+  "sources": [
+    {
+      "source_id": "PAID-001",
+      "title": "Helio paid-user adoption sample",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": "2026-09-paid-weekly-use",
+      "claim_value": "60 percent",
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "Sixty of 100 paid users sampled by email reported weekly use in September.",
+      "method": "Email panel; self-report",
+      "sample_size": 100
+    },
+    {
+      "source_id": "ALL-001",
+      "title": "Helio all-account adoption sample",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": "2026-09-all-weekly-use",
+      "claim_value": "40 percent",
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "Eighty of 200 accounts, including free accounts, reported weekly use in September. The all-account population differs from paid users.",
+      "method": "Account-stratified self-report",
+      "sample_size": 200
+    }
+  ]
+}

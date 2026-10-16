@@ -1,0 +1,82 @@
+{
+  "synthetic": true,
+  "dataset": {
+    "id": "synthetic-research-cases",
+    "version": 1,
+    "profile": "starter",
+    "case_id": "starter"
+  },
+  "sources": [
+    {
+      "source_id": "SURVEY-301",
+      "title": "Q3 Helio adoption survey, first sample",
+      "published": "2026-10-02",
+      "topic": "helio-adoption",
+      "claim_key": "q3-2026-paid-user-adoption",
+      "claim_value": "42 percent",
+      "tags": [
+        "Helio",
+        "adoption",
+        "Q3",
+        "paid users",
+        "survey"
+      ],
+      "text": "A synthetic survey of 300 paid Helio users in Q3 2026 found 42 percent used the new workflow at least weekly. Responses came from an email panel, so nonresponse bias is possible.",
+      "method": "Email panel; self-reported weekly use",
+      "sample_size": 300
+    },
+    {
+      "source_id": "SURVEY-077",
+      "title": "Q3 Helio adoption survey, second sample",
+      "published": "2026-10-04",
+      "topic": "helio-adoption",
+      "claim_key": "q3-2026-paid-user-adoption",
+      "claim_value": "58 percent",
+      "tags": [
+        "Helio",
+        "adoption",
+        "Q3",
+        "paid users",
+        "survey"
+      ],
+      "text": "A second synthetic survey of 70 paid Helio users in Q3 2026 reported 58 percent weekly use of the new workflow. Its respondent pool was recruited in an in-app prompt, so the sample may overrepresent active users.",
+      "method": "In-app respondent sample; self-reported weekly use",
+      "sample_size": 70
+    },
+    {
+      "source_id": "LOGS-118",
+      "title": "Helio event instrumentation note",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": "q3-2026-event-coverage",
+      "claim_value": "incomplete",
+      "tags": [
+        "Helio",
+        "adoption",
+        "Q3",
+        "event logs",
+        "measurement"
+      ],
+      "text": "The synthetic Q3 Helio event stream missed about one week of mobile events after an SDK rollout. It should not be used as a complete estimate of weekly adoption without adjustment.",
+      "method": "Instrumentation completeness audit",
+      "sample_size": null
+    },
+    {
+      "source_id": "SUPPORT-041",
+      "title": "Helio onboarding support themes",
+      "published": "2026-09-28",
+      "topic": "helio-support",
+      "claim_key": "q3-2026-support-theme",
+      "claim_value": "setup confusion",
+      "tags": [
+        "Helio",
+        "support",
+        "onboarding",
+        "setup"
+      ],
+      "text": "A synthetic review of 41 Q3 support tickets found setup confusion was the most common Helio onboarding theme. Ticket counts are not an adoption estimate.",
+      "method": "Manual coding of onboarding support tickets",
+      "sample_size": 41
+    }
+  ]
+}

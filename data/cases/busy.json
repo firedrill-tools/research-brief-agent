@@ -1,0 +1,395 @@
+{
+  "synthetic": true,
+  "dataset": {
+    "id": "synthetic-research-cases",
+    "version": 1,
+    "profile": "busy",
+    "case_id": "busy"
+  },
+  "sources": [
+    {
+      "source_id": "SUPPORT-001",
+      "title": "Helio support Q3 evidence 1",
+      "published": "2026-10-08",
+      "topic": "helio-support",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-support",
+        "Helio",
+        "research"
+      ],
+      "text": "Finding: Setup questions appeared in 54 of 120 Q3 support tickets; these are ticket counts, not user adoption.",
+      "method": "manual ticket coding",
+      "sample_size": 120
+    },
+    {
+      "source_id": "SUPPORT-002",
+      "title": "Helio support Q3 evidence 2",
+      "published": "2026-10-08",
+      "topic": "helio-support",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-support",
+        "Helio",
+        "research"
+      ],
+      "text": "Method note: manual ticket coding. Population: support tickets. The sampling frame limits generalization.",
+      "method": "manual ticket coding",
+      "sample_size": 120
+    },
+    {
+      "source_id": "SUPPORT-003",
+      "title": "Helio support Q3 evidence 3",
+      "published": "2026-10-08",
+      "topic": "helio-support",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-support",
+        "Helio",
+        "research"
+      ],
+      "text": "Limitations: Setup questions appeared in 54 of 120 Q3 support tickets; these are ticket counts, not user adoption. No causal effect or population-wide rate is established by this evidence.",
+      "method": "manual ticket coding",
+      "sample_size": 120
+    },
+    {
+      "source_id": "ADOPTION-001",
+      "title": "Helio adoption Q3 evidence 1",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "Finding: Of 400 sampled paid users, 184 reported using the workflow weekly in Q3.",
+      "method": "random email sample; self-report",
+      "sample_size": 400
+    },
+    {
+      "source_id": "ADOPTION-002",
+      "title": "Helio adoption Q3 evidence 2",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "Method note: random email sample; self-report. Population: paid users. The sampling frame limits generalization.",
+      "method": "random email sample; self-report",
+      "sample_size": 400
+    },
+    {
+      "source_id": "ADOPTION-003",
+      "title": "Helio adoption Q3 evidence 3",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "Limitations: Of 400 sampled paid users, 184 reported using the workflow weekly in Q3. No causal effect or population-wide rate is established by this evidence.",
+      "method": "random email sample; self-report",
+      "sample_size": 400
+    },
+    {
+      "source_id": "LATENCY-001",
+      "title": "Helio latency Q3 evidence 1",
+      "published": "2026-10-08",
+      "topic": "helio-latency",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-latency",
+        "Helio",
+        "research"
+      ],
+      "text": "Finding: The Q3 successful-request sample had median latency 180 milliseconds; failed calls were excluded.",
+      "method": "server-side latency histogram",
+      "sample_size": 20000
+    },
+    {
+      "source_id": "LATENCY-002",
+      "title": "Helio latency Q3 evidence 2",
+      "published": "2026-10-08",
+      "topic": "helio-latency",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-latency",
+        "Helio",
+        "research"
+      ],
+      "text": "Method note: server-side latency histogram. Population: successful API calls. The sampling frame limits generalization.",
+      "method": "server-side latency histogram",
+      "sample_size": 20000
+    },
+    {
+      "source_id": "LATENCY-003",
+      "title": "Helio latency Q3 evidence 3",
+      "published": "2026-10-08",
+      "topic": "helio-latency",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-latency",
+        "Helio",
+        "research"
+      ],
+      "text": "Limitations: The Q3 successful-request sample had median latency 180 milliseconds; failed calls were excluded. No causal effect or population-wide rate is established by this evidence.",
+      "method": "server-side latency histogram",
+      "sample_size": 20000
+    },
+    {
+      "source_id": "RETENTION-001",
+      "title": "Helio retention Q3 evidence 1",
+      "published": "2026-10-08",
+      "topic": "helio-retention",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-retention",
+        "Helio",
+        "research"
+      ],
+      "text": "Finding: Of 250 accounts created in July, 175 returned within 30 days; this cohort is not all paid users.",
+      "method": "fixed 30-day account cohort",
+      "sample_size": 250
+    },
+    {
+      "source_id": "RETENTION-002",
+      "title": "Helio retention Q3 evidence 2",
+      "published": "2026-10-08",
+      "topic": "helio-retention",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-retention",
+        "Helio",
+        "research"
+      ],
+      "text": "Method note: fixed 30-day account cohort. Population: new accounts. The sampling frame limits generalization.",
+      "method": "fixed 30-day account cohort",
+      "sample_size": 250
+    },
+    {
+      "source_id": "RETENTION-003",
+      "title": "Helio retention Q3 evidence 3",
+      "published": "2026-10-08",
+      "topic": "helio-retention",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-retention",
+        "Helio",
+        "research"
+      ],
+      "text": "Limitations: Of 250 accounts created in July, 175 returned within 30 days; this cohort is not all paid users. No causal effect or population-wide rate is established by this evidence.",
+      "method": "fixed 30-day account cohort",
+      "sample_size": 250
+    },
+    {
+      "source_id": "PRICING-001",
+      "title": "Helio pricing Q3 evidence 1",
+      "published": "2026-10-08",
+      "topic": "helio-pricing",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-pricing",
+        "Helio",
+        "research"
+      ],
+      "text": "Finding: Eleven of 18 interview participants requested clearer seat pricing; recruitment was voluntary.",
+      "method": "structured interviews",
+      "sample_size": 18
+    },
+    {
+      "source_id": "PRICING-002",
+      "title": "Helio pricing Q3 evidence 2",
+      "published": "2026-10-08",
+      "topic": "helio-pricing",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-pricing",
+        "Helio",
+        "research"
+      ],
+      "text": "Method note: structured interviews. Population: interview participants. The sampling frame limits generalization.",
+      "method": "structured interviews",
+      "sample_size": 18
+    },
+    {
+      "source_id": "PRICING-003",
+      "title": "Helio pricing Q3 evidence 3",
+      "published": "2026-10-08",
+      "topic": "helio-pricing",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-pricing",
+        "Helio",
+        "research"
+      ],
+      "text": "Limitations: Eleven of 18 interview participants requested clearer seat pricing; recruitment was voluntary. No causal effect or population-wide rate is established by this evidence.",
+      "method": "structured interviews",
+      "sample_size": 18
+    },
+    {
+      "source_id": "ACCESSIBILITY-001",
+      "title": "Helio accessibility Q3 evidence 1",
+      "published": "2026-10-08",
+      "topic": "helio-accessibility",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-accessibility",
+        "Helio",
+        "research"
+      ],
+      "text": "Finding: Four of 24 audited flows had focus-order defects; the audit did not include screen-reader testing.",
+      "method": "keyboard-only manual audit",
+      "sample_size": 24
+    },
+    {
+      "source_id": "ACCESSIBILITY-002",
+      "title": "Helio accessibility Q3 evidence 2",
+      "published": "2026-10-08",
+      "topic": "helio-accessibility",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-accessibility",
+        "Helio",
+        "research"
+      ],
+      "text": "Method note: keyboard-only manual audit. Population: tested interface flows. The sampling frame limits generalization.",
+      "method": "keyboard-only manual audit",
+      "sample_size": 24
+    },
+    {
+      "source_id": "ACCESSIBILITY-003",
+      "title": "Helio accessibility Q3 evidence 3",
+      "published": "2026-10-08",
+      "topic": "helio-accessibility",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-accessibility",
+        "Helio",
+        "research"
+      ],
+      "text": "Limitations: Four of 24 audited flows had focus-order defects; the audit did not include screen-reader testing. No causal effect or population-wide rate is established by this evidence.",
+      "method": "keyboard-only manual audit",
+      "sample_size": 24
+    },
+    {
+      "source_id": "MOBILE-001",
+      "title": "Helio mobile Q3 evidence 1",
+      "published": "2026-10-08",
+      "topic": "helio-mobile",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-mobile",
+        "Helio",
+        "research"
+      ],
+      "text": "Finding: Seven of 90 mobile event batches were delayed; delayed batches were replayed after the quarter closed.",
+      "method": "event ingestion completeness audit",
+      "sample_size": 90
+    },
+    {
+      "source_id": "MOBILE-002",
+      "title": "Helio mobile Q3 evidence 2",
+      "published": "2026-10-08",
+      "topic": "helio-mobile",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-mobile",
+        "Helio",
+        "research"
+      ],
+      "text": "Method note: event ingestion completeness audit. Population: mobile event batches. The sampling frame limits generalization.",
+      "method": "event ingestion completeness audit",
+      "sample_size": 90
+    },
+    {
+      "source_id": "MOBILE-003",
+      "title": "Helio mobile Q3 evidence 3",
+      "published": "2026-10-08",
+      "topic": "helio-mobile",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-mobile",
+        "Helio",
+        "research"
+      ],
+      "text": "Limitations: Seven of 90 mobile event batches were delayed; delayed batches were replayed after the quarter closed. No causal effect or population-wide rate is established by this evidence.",
+      "method": "event ingestion completeness audit",
+      "sample_size": 90
+    },
+    {
+      "source_id": "DOCUMENTATION-001",
+      "title": "Helio documentation Q3 evidence 1",
+      "published": "2026-10-08",
+      "topic": "helio-documentation",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-documentation",
+        "Helio",
+        "research"
+      ],
+      "text": "Finding: Twenty-one of 30 first-time readers completed the setup task without help; test tasks were scripted.",
+      "method": "task-based usability sessions",
+      "sample_size": 30
+    },
+    {
+      "source_id": "DOCUMENTATION-002",
+      "title": "Helio documentation Q3 evidence 2",
+      "published": "2026-10-08",
+      "topic": "helio-documentation",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-documentation",
+        "Helio",
+        "research"
+      ],
+      "text": "Method note: task-based usability sessions. Population: first-time readers. The sampling frame limits generalization.",
+      "method": "task-based usability sessions",
+      "sample_size": 30
+    },
+    {
+      "source_id": "DOCUMENTATION-003",
+      "title": "Helio documentation Q3 evidence 3",
+      "published": "2026-10-08",
+      "topic": "helio-documentation",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-documentation",
+        "Helio",
+        "research"
+      ],
+      "text": "Limitations: Twenty-one of 30 first-time readers completed the setup task without help; test tasks were scripted. No causal effect or population-wide rate is established by this evidence.",
+      "method": "task-based usability sessions",
+      "sample_size": 30
+    }
+  ]
+}

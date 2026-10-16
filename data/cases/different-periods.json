@@ -1,0 +1,43 @@
+{
+  "synthetic": true,
+  "dataset": {
+    "id": "synthetic-research-cases",
+    "version": 1,
+    "profile": "boundary",
+    "case_id": "different-periods"
+  },
+  "sources": [
+    {
+      "source_id": "PERIOD-Q2",
+      "title": "Helio Q2 adoption panel",
+      "published": "2026-07-04",
+      "topic": "helio-adoption",
+      "claim_key": "2026-q2-paid-weekly-use",
+      "claim_value": "40 percent",
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "In Q2 2026, 80 of 200 sampled paid users reported weekly workflow use. Recruitment used the same email frame as Q3.",
+      "method": "Email panel; self-report",
+      "sample_size": 200
+    },
+    {
+      "source_id": "PERIOD-Q3",
+      "title": "Helio Q3 adoption panel",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": "2026-q3-paid-weekly-use",
+      "claim_value": "46 percent",
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "In Q3 2026, 92 of 200 sampled paid users reported weekly workflow use. This was a new sample rather than a tracked individual cohort.",
+      "method": "Email panel; self-report",
+      "sample_size": 200
+    }
+  ]
+}

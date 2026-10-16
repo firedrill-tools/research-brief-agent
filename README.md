@@ -1,27 +1,65 @@
 # Research brief agent
 
-A standalone LlamaIndex/Gemini application that drafts research briefs from a small synthetic source set. It uses a local lexical retriever and LlamaIndex's citation query engine, then exposes the source IDs and the numbered citation map alongside the prose. Sources that assert different values for the same claim are flagged for review.
+A standalone LlamaIndex/Gemini application that retrieves controlled fictional documents and drafts a sourced brief. It uses an actual CitationQueryEngine with async refinement and the GoogleGenAI integration. Local lexical retrieval needs no embedding service. Source disagreements, invalid attribution and missing evidence remain visible.
 
 ## Run
 
-Requires Python 3.12+, `uv`, and a Google API key for a live brief.
+Python 3.12+ and uv:
 
 ```sh
-uv sync --extra test
-uv run pytest -q
-GOOGLE_API_KEY=... uv run research-brief 'What do Helio Q3 adoption surveys show?'
+uv sync --locked --extra test
+uv run --locked research-brief --list-cases
+uv run --locked research-brief --init-case busy --sources /tmp/my-research-sources.json
+uv run --locked research-brief --case no-match
 ```
 
-Set `GEMINI_MODEL` or pass `--model` to select an enabled Gemini model. The current package default is `gemini-3.7-flash`; verify account availability before a live run. The `GoogleGenAI` constructor checks model metadata through the provider, so a valid key is required even before generation. `--sources` accepts another JSON source set with the same fields. No embeddings service, web search or external data source is silently called.
+These commands need no model key. A live brief requires explicit Developer API credentials and a model enabled for your account. Export `GOOGLE_API_KEY` and `GEMINI_MODEL`, then:
 
-The result includes recognized corpus `source_ids`, an ordinal-preserving `citation_map` for every returned source node, and valid `cited_source_ids` referenced in the prose. Unknown identities remain visible in their original positions; they never shift a citation onto a later known source. `unknown_source_nodes` and `invalid_citation_markers` identify review evidence, while valid citations remain inspectable alongside invalid ones. Missing, unknown or out-of-range citations require review. Conflicting values for the same claim also require review. `draft` means source markers were present and no encoded conflict was found; it **does not** mean each prose claim was proven by the cited text. Source entailment and factual quality need a live and human review.
+```sh
+uv run --locked research-brief --case starter
+uv run --locked research-brief --case contradictory-surveys
+uv run --locked research-brief 'Summarize Helio support evidence.' --sources /tmp/my-research-sources.json --top-k 5 --timeout 60
+```
 
-## Evidence and limits
+`--model` overrides GEMINI_MODEL; there is no assumed default model. `--base-url` accepts an explicit HTTPS or loopback HTTP Developer API endpoint. Ambient Vertex/enterprise selection is rejected. The application never reads a production connector or web-search source. `.env.example` documents variables; the CLI does not automatically load .env files.
 
-[Scenarios](scenarios/README.md) include ordinary synthesis, contradictory surveys, missing evidence and unsupported claims. Ten offline tests pass, including the reproduced ordinal-attribution regression; one invokes the real LlamaIndex citation engine using its `MockLLM`. They do not call Gemini. Live Gemini output, usage and source quality are pending provider access.
+Custom JSON accepts a legacy array of strict source records or the versioned synthetic wrapper shown in data/cases. Fields include unique source_id, title, published ISO date, topic, nonempty tags and text; optional method/sample_size and claim_key/claim_value. Claim keys must describe the same metric, population and period if differing values should count as a conflict. Free-form contradictory text still needs human or semantic review.
 
-The application is useful without Firedrill. A thin Firedrill integration and persisted scenarios will be added against the qualified new release, not the retired interface. This repository is private and has no selected public license.
+## Sources and output
 
-Implementation references: [LlamaIndex citation query engine](https://docs.llamaindex.ai/en/stable/api_reference/query_engine/citation/), [Google GenAI integration](https://docs.llamaindex.ai/en/stable/api_reference/llms/google_genai/).
+The original question goes to a fresh local retriever. Topics with the highest token overlap are retained, then documents are ranked and capped by top_k. The receipt exposes ties, scores and truncation; lexical selection is not exhaustive semantic retrieval. Synthesis directions live in LlamaIndex templates. Source method, sample size and date are rendered with each body; manifest focus descriptions stay outside model context.
 
-Explore related applications in the [Firedrill example catalog](https://github.com/firedrill-tools/firedrill-example-catalog). Product and setup references: [Firedrill](https://firedrill.run/) and the [official developer documentation](https://docs.firedrill.run/). Use documentation matching the qualified release; this repository records its current integration limits above.
+The result exposes recognized `source_ids`, every actual source-node ordinal in `citation_map`, and valid `cited_source_ids`. Unknown nodes never shift citation numbers. Unknown/out-of-scope identities, forged chunks, invalid markers, unobserved full context or encoded conflicts require review. Valid cited evidence survives alongside errors. No match returns `insufficient` without a model call.
+
+`draft` means the attribution checks passed and no encoded conflict was found. It does not prove that each prose claim follows from its citation. Whitespace-normalized chunk correspondence and observed prompt text are evidence for inspection, not entailment or a semantic benchmark. Live Gemini and human review must assess weak evidence, unsupported conclusions and hostile source behavior.
+
+## Execution evidence
+
+Every run writes a private `.runs/<uuid>/receipt.json` (new directories 0700, file 0600); `--output-root` changes the root. Receipts include actual versions, source/template/question hashes, retrieval population, original returned chunks and raw brief, prepared request bodies, decoded HTTP responses before SDK validation, model/response/request IDs, SDK lifecycle events, completion flags and reported usage. These files can contain the source and generated business text; treat them as private. Provider headers and credentials are not recorded.
+
+Missing/partial/invalid usage is unknown; reported zero remains zero. Counts are preserved independently, including failed attempts. Cost is null. Synthetic HTTP counts are test fixtures and do not measure provider execution or billing. A source file changed during generation or an evidence-write failure refuses output. Failed receipts contain no result; raw evidence remains inspectable. Exceptions carry `receipt_path` and in-memory evidence; the CLI writes JSON errors to stderr and exits nonzero. If final persistence fails, the last file may remain running and in-memory evidence identifies the failure.
+
+Each native run owns its sync/async HTTP transports; cleanup is covered for success, startup failure, provider failure, cancellation and deadlines. Up to four async generateContent calls are allowed, with no SDK retry per call. Only one completed STOP text candidate can produce a brief. Missing completion, blocked/partial output and SDK schema failures remain failures through native refinement. Application budgets are 32768 context and 4096 output tokens; these are not measured provider model limits. See [COMPATIBILITY.md](COMPATIBILITY.md) for bounds, library ownership and supported surfaces.
+
+Use `await service.brief_async(...)` from async applications. `service.brief(...)` is the synchronous entry point. Concurrent read-only runs have separate clients and receipts. Caller-injected engines are trusted offline seams explicitly labeled in evidence; they do not qualify a provider run.
+
+## Data and checks
+
+Ten `synthetic-research-cases` v1 cases span starter, busy, ambiguous and boundary profiles. Busy contains 24 sources across eight topics. Read-only selection leaves bundled bytes unchanged; `--init-case` makes an exclusive 0600 copy and never overwrites an existing file. Each case has an exact file hash and declarative identity. No briefs, usage or cost are seeded. See [scenarios](scenarios/README.md).
+
+```sh
+uv run --locked python scripts/generate_data.py --check
+uv run --locked --extra test pytest -q
+uv build
+uv run --locked python scripts/check_distribution.py
+```
+
+60 offline checks exercise real LlamaIndex/GoogleGenAI/SDK HTTP, multi-call refinement errors and budgets, original raw measurements, source ordinals/scope/content, durable evidence, cancellation/recovery, actual CLI HTTP/signals and dataset integrity. Some domain tests use injected engines/MockLLM and are labeled accordingly. Fresh locked wheel and sdist verification runs outside the checkout with all ten bundled cases. CI runs these gates. None of this is a live Gemini quality claim.
+
+## Remaining gates
+
+Live Gemini ordinary/conflicting/weak-evidence proofs need owner-supplied account access and budget. Firedrill integration and persisted ordinary/negative cases await the new qualified release. This private repo has no selected public license. [PLAN.md](PLAN.md) tracks the remaining work.
+
+Implementation references: [LlamaIndex citation engine](https://developers.llamaindex.ai/python/framework-api-reference/query_engine/citation/), [GoogleGenAI integration](https://developers.llamaindex.ai/python/framework-api-reference/llms/google_genai/).
+
+Explore the [Firedrill example catalog](https://github.com/firedrill-tools/firedrill-example-catalog), [Firedrill](https://firedrill.run/) and [official developer documentation](https://docs.firedrill.run/). Use documentation matching the qualified release.

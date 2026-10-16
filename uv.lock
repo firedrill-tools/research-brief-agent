@@ -1932,9 +1932,11 @@ wheels = [
 
 [[package]]
 name = "research-brief-agent"
-version = "0.1.0"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
+    { name = "google-genai" },
+    { name = "httpx" },
     { name = "llama-index-core" },
     { name = "llama-index-llms-google-genai" },
 ]
@@ -1946,8 +1948,10 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "llama-index-core", specifier = ">=0.14,<0.16" },
-    { name = "llama-index-llms-google-genai", specifier = ">=0.11,<0.13" },
+    { name = "google-genai", specifier = "==2.31.0" },
+    { name = "httpx", specifier = "==0.28.1" },
+    { name = "llama-index-core", specifier = "==0.14.25" },
+    { name = "llama-index-llms-google-genai", specifier = "==0.11.3" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8,<10" },
 ]
 provides-extras = ["test"]

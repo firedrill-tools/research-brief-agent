@@ -1,0 +1,43 @@
+{
+  "synthetic": true,
+  "dataset": {
+    "id": "synthetic-research-cases",
+    "version": 1,
+    "profile": "ambiguous",
+    "case_id": "weak-evidence"
+  },
+  "sources": [
+    {
+      "source_id": "WEAK-001",
+      "title": "Helio adoption informal observation",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "Three volunteers said the workflow felt useful. No usage frequency or sampling frame was recorded. Weekly adoption cannot be estimated from these comments.",
+      "method": "Unstructured volunteer interviews",
+      "sample_size": 3
+    },
+    {
+      "source_id": "WEAK-002",
+      "title": "Helio adoption measurement gap",
+      "published": "2026-10-08",
+      "topic": "helio-adoption",
+      "claim_key": null,
+      "claim_value": null,
+      "tags": [
+        "helio-adoption",
+        "Helio",
+        "research"
+      ],
+      "text": "The export has no weekly-use variable and no denominator. Do not interpret the number of exported rows as a weekly adoption rate.",
+      "method": "Export schema inspection",
+      "sample_size": null
+    }
+  ]
+}

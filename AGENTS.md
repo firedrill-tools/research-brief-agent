@@ -1,7 +1,11 @@
 # Working rules
 
-Use only synthetic source documents. Keep every generated brief tied to the actual LlamaIndex source nodes returned by the query engine, and expose contradictory source claims. A numbered citation marker is not proof that its claim is entailed; do not call a draft verified.
+Use synthetic source documents and the actual LlamaIndex CitationQueryEngine/GoogleGenAI path. Keep retrieval queries free of synthesis instructions. Preserve every source-node ordinal, including unknown identities; never drop nodes and renumber later evidence. Retain valid citations alongside invalid markers. Validate selected source identity and chunk correspondence. A citation marker and matching chunk are not proof that prose is entailed. Never call a draft verified.
 
-Tests using `MockLLM` are offline evidence only. Do not claim a live Gemini run without the API call and output. Add Firedrill integration only against the new qualified release.
+Native calls use owned public HTTPX clients, a per-run LLM callback manager and bounded async generateContent. Retain original request/response bodies and measurements, including failed attempts. Do not replace the model with a canned answer, patch vendor code, use shared Settings for a run, normalize unknown usage to zero or infer billing. LlamaIndex refinement catches ValueError/TypeError/ValidationError: errors must remain failures through the public callback handler and post-query latch. Test real refinement, not only a one-call stub.
 
-Preserve every returned source-node ordinal before mapping citations. Unknown IDs must remain visible and require review; never drop them and renumber later known nodes. Retain valid cited evidence alongside invalid markers. Current ten checks include actual Response/NodeWithScore mapping regressions, but native Gemini completion/usage/ownership, richer hash-bound data and package qualification remain follow-up work in PLAN.md.
+Before release, recheck source bytes and durable evidence. Failed runs expose no result; raw output remains evidence. Close transports on success, model errors, startup errors, cancellation and deadlines. A caller-injected engine is a trusted offline/test seam, explicitly labeled in receipts; its lifecycle belongs to its caller.
+
+Data manifest focus descriptions stay outside model input. Run `scripts/generate_data.py --check`, locked tests and fresh wheel/sdist verification after relevant changes. Ten cases span four profiles; busy has 24 sources/eight topics. No seeded provider usage, costs or model answers.
+
+Live Gemini quality, human source entailment and released Firedrill integration remain external gates. Use only the new qualified Firedrill interface. Keep this repo private until publication and licensing are decided.

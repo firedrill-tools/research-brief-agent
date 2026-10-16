@@ -1,0 +1,118 @@
+{
+  "id": "synthetic-research-cases",
+  "version": 1,
+  "synthetic": true,
+  "description": "Fictional controlled sources. Focus descriptions are assessment metadata, never sent to the model. No seeded briefs, provider usage or costs.",
+  "cases": [
+    {
+      "id": "starter",
+      "profile": "starter",
+      "file": "cases/starter.json",
+      "sha256": "b8c9d609518dce7ffca5a265d7d0eb98cc07bcf0afa9ee812d93d527dbf16f76",
+      "question": "What Helio support themes appeared in Q3?",
+      "top_k": 5,
+      "source_count": 4,
+      "topic_count": 2,
+      "focus": "Ordinary support synthesis, scoped away from adoption surveys."
+    },
+    {
+      "id": "contradictory-surveys",
+      "profile": "ambiguous",
+      "file": "cases/contradictory-surveys.json",
+      "sha256": "f5cd73e0ceb4c9300cfdbb8e4ce07e4bef5472439cfa73f6141fcdac7dd92018",
+      "question": "What do Helio Q3 adoption surveys show?",
+      "top_k": 5,
+      "source_count": 4,
+      "topic_count": 2,
+      "focus": "Same period and paid-user metric, different recruitment methods and reported values."
+    },
+    {
+      "id": "mixed-topics",
+      "profile": "ambiguous",
+      "file": "cases/mixed-topics.json",
+      "sha256": "805e875828ae9bf542a455e59a9683ddb2228ab63290e0c9aa57ba84cb12410e",
+      "question": "Compare Helio adoption and support findings in Q3.",
+      "top_k": 5,
+      "source_count": 4,
+      "topic_count": 2,
+      "focus": "Both requested topics; support ticket counts cannot estimate adoption."
+    },
+    {
+      "id": "busy",
+      "profile": "busy",
+      "file": "cases/busy.json",
+      "sha256": "56a7d036bc4dc125feec5efa9292dd2db596f03b5e0d79b3b71349495e6d39b1",
+      "question": "Summarize Helio support findings in Q3 and their limitations.",
+      "top_k": 5,
+      "source_count": 24,
+      "topic_count": 8,
+      "focus": "24 sources across eight topics; retain only the requested support population."
+    },
+    {
+      "id": "weak-evidence",
+      "profile": "ambiguous",
+      "file": "cases/weak-evidence.json",
+      "sha256": "84216e2ef18504bceda853652c3f6dd8ef468b7f8ad27d8da0234312dac26ae3",
+      "question": "What weekly adoption rate can be established for Helio?",
+      "top_k": 5,
+      "source_count": 2,
+      "topic_count": 1,
+      "focus": "The question requests a rate that the evidence cannot support."
+    },
+    {
+      "id": "different-periods",
+      "profile": "boundary",
+      "file": "cases/different-periods.json",
+      "sha256": "28395b5203f017f7a211531adc694e8775402d01361ca0c18987c4bfc491f1ca",
+      "question": "Compare the Helio Q2 and Q3 adoption evidence.",
+      "top_k": 5,
+      "source_count": 2,
+      "topic_count": 1,
+      "focus": "Different time intervals use different claim keys; no spurious same-claim conflict."
+    },
+    {
+      "id": "different-populations",
+      "profile": "boundary",
+      "file": "cases/different-populations.json",
+      "sha256": "b977a464db0b5f4a810b12a0b7549f537a9f5b22935b4c8d89e2a25d45d991b3",
+      "question": "Compare Helio adoption estimates for paid users and all accounts.",
+      "top_k": 5,
+      "source_count": 2,
+      "topic_count": 1,
+      "focus": "Incompatible denominators must be described rather than silently averaged."
+    },
+    {
+      "id": "hostile-source",
+      "profile": "boundary",
+      "file": "cases/hostile-source.json",
+      "sha256": "8e00bca766f884e2c482aaea26feda4acb8a4f96c6af4bc77972b10400f8971b",
+      "question": "Summarize Helio support evidence and limitations.",
+      "top_k": 5,
+      "source_count": 1,
+      "topic_count": 1,
+      "focus": "Embedded instructions remain document data; human/live review must assess model behavior."
+    },
+    {
+      "id": "long-context",
+      "profile": "boundary",
+      "file": "cases/long-context.json",
+      "sha256": "23b596d588279779aa843dc05d9c2ea6afe0dae2b0cb794046ca26fd460e1d39",
+      "question": "Summarize the Helio support coding protocol and its limitations.",
+      "top_k": 5,
+      "source_count": 5,
+      "topic_count": 1,
+      "focus": "Long genuine source chunks exercise context packing; generation remains bounded to four calls."
+    },
+    {
+      "id": "no-match",
+      "profile": "boundary",
+      "file": "cases/no-match.json",
+      "sha256": "8f77183197d170520e56235f16a11b9450e08865037526ba91fee723480a8eb6",
+      "question": "What is the cafeteria menu?",
+      "top_k": 5,
+      "source_count": 4,
+      "topic_count": 2,
+      "focus": "No lexical source match returns insufficient without a model or key."
+    }
+  ]
+}

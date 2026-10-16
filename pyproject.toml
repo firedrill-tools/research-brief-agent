@@ -1,9 +1,10 @@
 [project]
 name = "research-brief-agent"
-version = "0.1.0"
+version = "0.2.0"
+readme = "README.md"
 description = "Source-aware research briefs with LlamaIndex and Gemini"
 requires-python = ">=3.12"
-dependencies = ["llama-index-core>=0.14,<0.16", "llama-index-llms-google-genai>=0.11,<0.13"]
+dependencies = ["llama-index-core==0.14.25", "llama-index-llms-google-genai==0.11.3", "google-genai==2.31.0", "httpx==0.28.1"]
 
 [project.optional-dependencies]
 test = ["pytest>=8,<10"]
@@ -17,6 +18,12 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/research_brief"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"data" = "research_brief/sample_data"
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "data", "fixtures", "tests", "scripts", "scenarios", "README.md", "AGENTS.md", "PLAN.md", "COMPATIBILITY.md", ".env.example", "pyproject.toml", "uv.lock"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
