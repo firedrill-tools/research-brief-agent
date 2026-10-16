@@ -146,7 +146,10 @@ def test_ambient_cloud_backend_is_rejected_before_any_provider_client(variable,v
     assert script.requests==[] and error.value.evidence['provider_observations']==[]
 
 
-def test_actual_refinement_failure_preserves_the_prior_response(tmp_path):
+def test_actual_refinement_failure_preserves_the_prior_response(tmp_path,monkeypatch):
+    from llama_index.core.utils import GlobalsHelper
+    def no_download(*_):raise AssertionError('application chunking must not require NLTK asset downloads')
+    monkeypatch.setattr(GlobalsHelper,'wait_for_nltk_check',no_download)
     rows=json.loads(CORPUS.read_text());template=rows[-1]
     rows=[]
     for index in range(5):
@@ -154,7 +157,7 @@ def test_actual_refinement_failure_preserves_the_prior_response(tmp_path):
     file=tmp_path/'long.json';file.write_text(json.dumps(rows));script=Script([BODY,503])
     with pytest.raises(Exception) as error:run(script,source=file)
     data=error.value.evidence
-    assert len(script.requests)==2 and script.closed and data['result'] is None
+    assert len(script.requests)==2 and script.closed and data['result'] is None,data['error']
     assert data['provider_observations'][0]['body']==BODY and data['provider_observations'][1]['http_status']==503
     assert data['reported_usage']['fields']['totalTokenCount']==30
 
@@ -173,5 +176,5 @@ def test_actual_refinement_loop_cannot_exceed_four_generation_requests(tmp_path)
     rows=[{**template,'source_id':f'BUDGET-{index}','title':f'Helio support evidence {index}','text':' '.join(['1','2','3','4','5','6','7','8','9','0']*790)} for index in range(20)]
     file=tmp_path/'budget.json';file.write_text(json.dumps(rows));script=Script([BODY]*8)
     with pytest.raises(Exception) as error:run(script,source=file,top_k=20)
-    assert len(script.requests)==4 and script.closed and error.value.evidence['result'] is None
+    assert len(script.requests)==4 and script.closed and error.value.evidence['result'] is None,error.value.evidence['error']
     assert error.value.evidence['reported_usage']['fields']['totalTokenCount']==60

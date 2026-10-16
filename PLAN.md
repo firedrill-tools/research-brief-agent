@@ -15,6 +15,7 @@
 - Native Gemini missing finishReason could become a draft. The original native MAX_TOKENS/SAFETY responses already failed; preserve that behavior. Explicit completion checks retain raw evidence.
 - LlamaIndex refinement catches ValueError/TypeError/SDK validation exceptions and can return empty synthesis. Public LLM callbacks raise a RuntimeError with the original cause and a per-run failure latch; real multi-call refinement failures and the four-call budget are covered.
 - A source changed during generation left a draft in a failed receipt. Failed runs now retain raw evidence with result null.
+- CI exposed a pre-dispatch long-context cold-start failure. The default sentence splitter's NLTK asset dependency was reproduced with an empty cache/denied download; public TokenTextSplitter now provides citation chunks and the native refinement regression forbids that download path.
 
 ## Parked gates
 

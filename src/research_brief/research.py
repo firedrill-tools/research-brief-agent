@@ -10,6 +10,7 @@ from llama_index.core import PromptTemplate
 from llama_index.core.callbacks import CallbackManager
 from llama_index.core.indices.prompt_helper import PromptHelper,ChatPromptHelper
 from llama_index.core.query_engine import CitationQueryEngine
+from llama_index.core.node_parser import TokenTextSplitter
 from llama_index.core.response_synthesizers import get_response_synthesizer
 from llama_index.core.schema import MetadataMode
 
@@ -34,7 +35,8 @@ def build_engine(retriever,llm):
         prompt_helper=PromptHelper.from_llm_metadata(llm.metadata),chat_prompt_helper=ChatPromptHelper.from_llm_metadata(llm.metadata),
         text_qa_template=QA_TEMPLATE,refine_template=REFINE_TEMPLATE,use_async=True,streaming=False)
     return CitationQueryEngine(retriever=retriever,llm=llm,response_synthesizer=synthesizer,callback_manager=callbacks,
-        citation_chunk_size=1024,citation_chunk_overlap=20,metadata_mode=MetadataMode.NONE)
+        citation_chunk_size=1024,citation_chunk_overlap=20,metadata_mode=MetadataMode.NONE,
+        text_splitter=TokenTextSplitter(chunk_size=1024,chunk_overlap=20,keep_whitespaces=True))
 
 
 def conflicts(sources):
