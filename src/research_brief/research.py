@@ -81,28 +81,37 @@ class ResearchBriefService:
             " Compare source methods and sample sizes. If sources disagree, explain the disagreement "
             "rather than selecting one number. Do not add claims unsupported by the listed sources."
         )
-        citation_map = [node.node.metadata["source_id"] for node in response.source_nodes
-                        if node.node.metadata.get("source_id") in self.by_id]
-        used_ids = sorted(set(citation_map))
-        if not used_ids:
+        # Preserve original source-node ordinals. Dropping an unknown node
+        # would make [1] falsely name the next recognized source.
+        citation_map = [node.node.metadata.get("source_id") if isinstance(node.node.metadata.get("source_id"), str) else None
+                        for node in response.source_nodes]
+        used_ids = sorted({source_id for source_id in citation_map if source_id in self.by_id})
+        unknown_nodes = [{"position": index, "source_id": source_id}
+                         for index, source_id in enumerate(citation_map, 1) if source_id not in self.by_id]
+        if not citation_map:
             return {"status": "insufficient", "brief": None, "source_ids": [],
-                    "conflicts": {}, "reason": "The generated response had no known source nodes."}
+                    "conflicts": {}, "reason": "The generated response had no source nodes."}
         selected = [self.by_id[source_id] for source_id in used_ids]
         disagreements = conflicts(selected)
         markers = {int(value) for value in re.findall(r"\[(\d+)\]", str(response))}
-        valid_markers = bool(markers) and all(1 <= value <= len(citation_map) for value in markers)
-        cited_ids = sorted({citation_map[value - 1] for value in markers}) if valid_markers else []
+        valid_markers = {value for value in markers if 1 <= value <= len(citation_map) and citation_map[value - 1] in self.by_id}
+        invalid_markers = sorted(markers - valid_markers)
+        cited_ids = sorted({citation_map[value - 1] for value in valid_markers})
         review_reasons = []
         if disagreements:
             review_reasons.append("Conflicting values for the same claim need review.")
-        if not valid_markers:
-            review_reasons.append("The generated prose has no valid numbered source citations.")
+        if unknown_nodes:
+            review_reasons.append("Returned source nodes include unknown corpus identities; preserve original citation positions.")
+        if not markers or invalid_markers:
+            review_reasons.append("The generated prose has absent or unsupported numbered source citations.")
         return {
             "status": "review_required" if review_reasons else "draft",
             "brief": str(response),
             "source_ids": used_ids,
             "citation_map": {str(index): source_id for index, source_id in enumerate(citation_map, 1)},
             "cited_source_ids": cited_ids,
+            "unknown_source_nodes": unknown_nodes,
+            "invalid_citation_markers": invalid_markers,
             "sources": [{key: item[key] for key in ("source_id", "title", "published", "claim_key", "claim_value")}
                         for item in selected],
             "conflicts": disagreements,

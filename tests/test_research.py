@@ -96,3 +96,36 @@ def test_real_llamaindex_citation_engine_path_without_network():
     result = service.brief("What do Helio Q3 adoption surveys show?")
     assert {"SURVEY-301", "SURVEY-077"}.issubset(set(result["source_ids"]))
     assert result["status"] == "review_required"  # MockLLM has no valid cited brief.
+
+
+def response_from_nodes(text,ids):
+    from llama_index.core.base.response.schema import Response as LlamaResponse
+    from llama_index.core.schema import TextNode,NodeWithScore
+    class Engine:
+        def query(self,_prompt):
+            return LlamaResponse(response=text,source_nodes=[NodeWithScore(node=TextNode(text='Controlled source-node content',metadata={'source_id':source_id})) for source_id in ids])
+    return lambda _retriever:Engine()
+
+
+def test_unknown_first_source_cannot_shift_a_citation_to_the_next_known_source():
+    service=ResearchBriefService(SOURCE_PATH,response_from_nodes('An outside claim [1].',['UNKNOWN','SUPPORT-041']))
+    result=service.brief('What Helio support themes appeared in Q3?')
+    assert result['status']=='review_required'
+    assert result['citation_map']=={'1':'UNKNOWN','2':'SUPPORT-041'}
+    assert result['cited_source_ids']==[] and result['invalid_citation_markers']==[1]
+    assert result['unknown_source_nodes']==[{'position':1,'source_id':'UNKNOWN'}]
+
+
+def test_valid_citations_survive_alongside_unknown_and_out_of_range_markers():
+    service=ResearchBriefService(SOURCE_PATH,response_from_nodes('Known [2], unknown [1], absent [9].',['UNKNOWN','SUPPORT-041']))
+    result=service.brief('What Helio support themes appeared in Q3?')
+    assert result['status']=='review_required' and result['cited_source_ids']==['SUPPORT-041']
+    assert result['invalid_citation_markers']==[1,9] and result['citation_map']['2']=='SUPPORT-041'
+
+
+def test_all_unknown_source_context_is_visible_as_review_not_renamed_or_discarded():
+    service=ResearchBriefService(SOURCE_PATH,response_from_nodes('An outside claim [1].',['UNKNOWN']))
+    result=service.brief('What Helio support themes appeared in Q3?')
+    assert result['status']=='review_required' and result['brief']=='An outside claim [1].'
+    assert result['source_ids']==[] and result['citation_map']=={'1':'UNKNOWN'}
+    assert result['unknown_source_nodes'] and result['invalid_citation_markers']==[1]
