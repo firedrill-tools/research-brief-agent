@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "2026-10-14",
+  "name": "sourced research briefs \u2014 actual application",
+  "target": {
+    "kind": "command",
+    "argv": [
+      "node",
+      "firedrill/target.mjs"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "starter",
+      "name": "Support source synthesis",
+      "input": {
+        "caseId": "starter"
+      }
+    },
+    {
+      "id": "contradictory-surveys",
+      "name": "Contradictory survey sources",
+      "input": {
+        "caseId": "contradictory-surveys"
+      }
+    }
+  ],
+  "repetitions": 1,
+  "concurrency": 1,
+  "limits": {
+    "timeoutMs": 180000,
+    "maxRuns": 2,
+    "maxOutputBytes": 4194304
+  }
+}

@@ -63,3 +63,7 @@ Live Gemini ordinary/conflicting/weak-evidence proofs need owner-supplied accoun
 Implementation references: [LlamaIndex citation engine](https://developers.llamaindex.ai/python/framework-api-reference/query_engine/citation/), [GoogleGenAI integration](https://developers.llamaindex.ai/python/framework-api-reference/llms/google_genai/).
 
 Explore the [Firedrill example catalog](https://github.com/firedrill-tools/firedrill-example-catalog), [Firedrill](https://firedrill.run/) and [official developer documentation](https://docs.firedrill.run/). Use documentation matching the qualified release.
+
+## Current Firedrill connection — 2026-10-19
+
+The [agent-first adapter and recipe](firedrill/README.md) now use exact-pinned CLI/SDK 2.2.2 and the current command envelope. This supersedes earlier notes saying the release was unavailable. Offline validation is distinct from authenticated persisted execution and live model quality, which remain pending.

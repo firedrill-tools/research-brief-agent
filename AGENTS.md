@@ -9,3 +9,7 @@ Before release, recheck source bytes and durable evidence. Failed runs expose no
 Data manifest focus descriptions stay outside model input. Run `scripts/generate_data.py --check`, locked tests and fresh wheel/sdist verification after relevant changes. Ten cases span four profiles; busy has 24 sources/eight topics. No seeded provider usage, costs or model answers.
 
 Live Gemini quality, human source entailment and released Firedrill integration remain external gates. Use only the new qualified Firedrill interface. Keep this repo private until publication and licensing are decided.
+
+## Current Firedrill connection — 2026-10-19
+
+The optional `firedrill/` toolchain now pins released CLI/SDK 2.2.2. Read its README, preserve the actual application entry point and run its offline tests with the existing verification gates. Earlier release-unavailability notes are historical; authenticated persisted and live model proofs remain pending. No retired API, guessed Tool binding, canned normal response or paid campaign.
