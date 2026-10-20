@@ -2,6 +2,8 @@
 
 A standalone LlamaIndex/Gemini application that retrieves controlled fictional documents and drafts a sourced brief. It uses an actual CitationQueryEngine with async refinement and the GoogleGenAI integration. Local lexical retrieval needs no embedding service. Source disagreements, invalid attribution and missing evidence remain visible.
 
+This example repository is publicly viewable. A project license has not been selected.
+
 ## Simulate with Firedrill
 
 [Firedrill](https://firedrill.run/) is a simulation platform for AI agents.
@@ -72,7 +74,7 @@ uv run --locked python scripts/check_distribution.py
 
 ## Remaining gates
 
-Live Gemini ordinary/conflicting/weak-evidence proofs need owner-supplied account access and budget. The included [Firedrill integration](firedrill/README.md) uses the real CLI; authenticated persisted ordinary/negative runs remain unverified. This private repo has no selected public license. [PLAN.md](PLAN.md) tracks the remaining work.
+Live Gemini ordinary/conflicting/weak-evidence proofs need owner-supplied account access and budget. The included [Firedrill integration](firedrill/README.md) uses the real CLI; authenticated persisted ordinary/negative runs remain unverified. This public repository has no selected project license. [PLAN.md](PLAN.md) tracks the remaining work.
 
 Implementation references: [LlamaIndex citation engine](https://developers.llamaindex.ai/python/framework-api-reference/query_engine/citation/), [GoogleGenAI integration](https://developers.llamaindex.ai/python/framework-api-reference/llms/google_genai/).
 
